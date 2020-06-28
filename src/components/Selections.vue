@@ -1,8 +1,10 @@
 <template>
   <div class="selections">
     <button class="selection" @click="clickHandler('rock')">✊</button>
-    <button class="selection" @click="clickHandler('paper')">✋</button>
-    <button class="selection" @click="clickHandler('scissors')">✌</button>
+    <button class="selection" @click="clickHandler('paper')">📄</button>
+    <button class="selection" @click="clickHandler('scissors')">✂️</button>
+    <button class="selection" @click="clickHandler('lizard')">🦎</button>
+    <button class="selection" @click="clickHandler('spock')">🖖</button>
   </div>
 </template>
 
@@ -32,6 +34,11 @@
   }
   .selection:hover {
     transform: scale(1.2);
+  }
+  @media only screen and (max-width: 375px) {
+    .selection {
+      font-size: 3rem;
+    }
   }
 
 </style>

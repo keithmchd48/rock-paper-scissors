@@ -1,36 +1,54 @@
 <template>
   <div id="app">
-    <Selections :clickHandler="clickHandler"></Selections>
-    <Results :userWins="userWins"
-             :computerWins="computerWins"
-             :matchArray="matchArray">
-    </Results>
+    <div class="main-container">
+      <div class="legend-div">
+        <Legend></Legend>
+      </div>
+      <div class="match">
+        <Selections :clickHandler="clickHandler"></Selections>
+        <Results :userWins="userWins"
+                 :computerWins="computerWins"
+                 :matchArray="matchArray">
+        </Results>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import Selections from "@/components/Selections";
 import Results from "@/components/Results";
+import Legend from "@/components/Legend";
 const SELECTIONS = [
   {
     name: 'rock',
     emoji: '✊',
-    beats: 'scissors'
+    beats: ['scissors', 'lizard']
   },
   {
     name: 'paper',
-    emoji: '✋',
-    beats: 'rock'
+    emoji: '📄',
+    beats: ['rock', 'spock']
   },
   {
     name: 'scissors',
-    emoji: '✌',
-    beats: 'paper'
-  }
+    emoji: '✂️',
+    beats: ['paper', 'lizard']
+  },
+  {
+    name: 'lizard',
+    emoji: '🦎',
+    beats: ['spock', 'paper']
+  },
+  {
+    name: 'spock',
+    emoji: '🖖',
+    beats: ['scissors', 'rock']
+  },
 ]
 export default {
   name: 'App',
-  components: {Results, Selections},
+  components: {Legend, Results, Selections},
   data () {
     return {
       userWins: 0,
@@ -74,10 +92,10 @@ export default {
       }
     },
     determineWinner (player1, player2) {
-      if (player1.beats === player2.name) {
+      if (player1.beats.includes(player2.name)) {
         return 1
       }
-      if (player2.beats === player1.name) {
+      if (player2.beats.includes(player1.name)) {
         return 2
       }
       return 0
@@ -107,6 +125,23 @@ export default {
   /*-moz-osx-font-smoothing: grayscale;*/
 }
   body {
-    background-color: #ccc;
+    background-color: mintcream;
   }
+  .main-container {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    justify-items: center;
+  }
+@media only screen and (max-width: 860px) {
+  .main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+  }
+  .legend-div {
+    margin-bottom: 3rem;
+  }
+}
 </style>

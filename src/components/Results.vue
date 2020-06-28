@@ -58,4 +58,9 @@
     opacity: 1;
     font-size: 2.4rem;
   }
+  @media only screen and (max-width: 375px) {
+    .results {
+      font-size: 1.5rem;
+    }
+  }
 </style>
