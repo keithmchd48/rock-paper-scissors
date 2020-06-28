@@ -1,30 +1,16 @@
 <template>
   <div id="app">
-    <div class="selections">
-      <button class="selection" @click="clickHandler('rock')">✊</button>
-      <button class="selection" @click="clickHandler('paper')">✋</button>
-      <button class="selection" @click="clickHandler('scissors')">✌</button>
-    </div>
-    <div class="results">
-      <div>
-        You
-        <span class="result-score">{{userWins}}</span>
-      </div>
-      <div>
-        Computer
-        <span class="result-score">{{computerWins}}</span>
-      </div>
-      <div v-for="(arr, key) in matchArray"
-           :key="key"
-           class="result-selection"
-           :class="[{'winner': arr.winner}]">
-        {{arr.emoji}}
-      </div>
-    </div>
+    <Selections :clickHandler="clickHandler"></Selections>
+    <Results :userWins="userWins"
+             :computerWins="computerWins"
+             :matchArray="matchArray">
+    </Results>
   </div>
 </template>
 
 <script>
+import Selections from "@/components/Selections";
+import Results from "@/components/Results";
 const SELECTIONS = [
   {
     name: 'rock',
@@ -44,6 +30,7 @@ const SELECTIONS = [
 ]
 export default {
   name: 'App',
+  components: {Results, Selections},
   data () {
     return {
       userWins: 0,
@@ -122,40 +109,4 @@ export default {
   body {
     background-color: #ccc;
   }
-  .selections {
-    display: flex;
-    justify-content: center;
-  }
-  .selection {
-    background: none;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    font-size: 4rem;
-    transition: 100ms;
-  }
-  .selection:hover {
-    transform: scale(1.2);
-  }
-  .results {
-    margin-top: 1rem;
-    font-size: 2rem;
-    display: grid;
-    justify-content: center;
-    grid-template-columns: repeat(2, 1fr);
-    justify-items: center;
-    align-items: center;
-  }
-  .result-score {
-    margin-left: .1rem;
-    font-size: 1.2rem;
-    color: #333;
-  }
-  .result-selection {
-    opacity: .5;
-  }
-.result-selection.winner {
-  opacity: 1;
-  font-size: 2.4rem;
-}
 </style>
