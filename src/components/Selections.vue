@@ -1,10 +1,12 @@
 <template>
   <div class="selections">
-    <button class="selection" @click="clickHandler('rock')">✊</button>
-    <button class="selection" @click="clickHandler('paper')">📄</button>
-    <button class="selection" @click="clickHandler('scissors')">✂️</button>
-    <button class="selection" @click="clickHandler('lizard')">🦎</button>
-    <button class="selection" @click="clickHandler('spock')">🖖</button>
+    <div class="selections__row">
+      <button class="selections__row__cell" @click="clickHandler('rock')">✊</button>
+      <button class="selections__row__cell" @click="clickHandler('paper')">📄</button>
+      <button class="selections__row__cell" @click="clickHandler('scissors')">✂️</button>
+      <button class="selections__row__cell" @click="clickHandler('lizard')">🦎</button>
+      <button class="selections__row__cell" @click="clickHandler('spock')">🖖</button>
+    </div>
   </div>
 </template>
 
@@ -19,25 +21,38 @@
   }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
   .selections {
-    display: flex;
-    justify-content: center;
+    display: table;
+    width: 100%;
+
+    &__row {
+      display: table-row;
+
+      &__cell {
+        background: none;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        font-size: 4rem;
+        transition: 100ms;
+        display: table-cell;
+        padding: 0;
+        
+        &:hover {
+          transform: scale(1.2);
+        }
+      }
+    }
   }
-  .selection {
-    background: none;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    font-size: 4rem;
-    transition: 100ms;
-  }
-  .selection:hover {
-    transform: scale(1.2);
-  }
+
   @media only screen and (max-width: 375px) {
-    .selection {
-      font-size: 3rem;
+    .selections {
+      &__row {
+        &__cell {
+          font-size: 3rem;
+        }
+      }
     }
   }
 
